@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1ilzr1i" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.3">
+  <bpmn:error id="oplataErrID" name="OplataError" errorCode="OplataKwotaErrorCode" />
+  <bpmn:process id="PobranieOplaty" name="PobranieOplaty" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1jcj0tp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_09zqm8u">
+      <bpmn:incoming>SequenceFlow_0p8l0uh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_0e5ljqn">
+      <bpmn:incoming>SequenceFlow_0ulpo5j</bpmn:incoming>
+      <bpmn:errorEventDefinition errorRef="oplataErrID" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1jcj0tp" sourceRef="StartEvent_1" targetRef="Task_117b9bs" />
+    <bpmn:userTask id="Task_117b9bs" name="Przelew oplaty" camunda:assignee="${inicjator}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="oplata_kwota" label="Zaplac kwote" type="long" defaultValue="${zamowienie_kwota}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1jcj0tp</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1bybt73</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1n8gkwn" name="Poprawna kwota?" default="SequenceFlow_0ulpo5j">
+      <bpmn:incoming>SequenceFlow_1bybt73</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0p8l0uh</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0ulpo5j</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1bybt73" sourceRef="Task_117b9bs" targetRef="ExclusiveGateway_1n8gkwn" />
+    <bpmn:sequenceFlow id="SequenceFlow_0p8l0uh" name="Tak" sourceRef="ExclusiveGateway_1n8gkwn" targetRef="EndEvent_09zqm8u">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${zamowienie_kwota &lt;= oplata_kwota}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0ulpo5j" name="Nie" sourceRef="ExclusiveGateway_1n8gkwn" targetRef="EndEvent_0e5ljqn" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PobranieOplaty">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_09zqm8u_di" bpmnElement="EndEvent_09zqm8u">
+        <dc:Bounds x="654" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1ht53wc_di" bpmnElement="EndEvent_0e5ljqn">
+        <dc:Bounds x="654" y="201" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jcj0tp_di" bpmnElement="SequenceFlow_1jcj0tp">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="259" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1txzzd6_di" bpmnElement="Task_117b9bs">
+        <dc:Bounds x="259" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1n8gkwn_di" bpmnElement="ExclusiveGateway_1n8gkwn" isMarkerVisible="true">
+        <dc:Bounds x="409" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="392" y="65" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1bybt73_di" bpmnElement="SequenceFlow_1bybt73">
+        <di:waypoint x="359" y="120" />
+        <di:waypoint x="409" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0p8l0uh_di" bpmnElement="SequenceFlow_0p8l0uh">
+        <di:waypoint x="459" y="120" />
+        <di:waypoint x="654" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="480" y="99" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ulpo5j_di" bpmnElement="SequenceFlow_0ulpo5j">
+        <di:waypoint x="434" y="145" />
+        <di:waypoint x="434" y="219" />
+        <di:waypoint x="654" y="219" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="370" y="145" width="16" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

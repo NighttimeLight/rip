@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="Definitions_02xl7m4" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.6.0">
+  <decision id="OcenaPodania" name="OcenaPodania">
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="input_1" label="Liczba mundurów">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text>podanie_iloscMundorow</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1mrcbmd" label="Liczba karabinów">
+        <inputExpression id="LiteralExpression_1x27gxr" typeRef="integer">
+          <text>podanie_iloscKarabinow</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1rh4c2t" label="Proponowana kwota">
+        <inputExpression id="LiteralExpression_044mxom" typeRef="integer">
+          <text>podanie_kwota</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Czy pozytywna?" name="decyzja_czyPozytywna" typeRef="boolean" />
+      <output id="OutputClause_1i8874d" label="Uzasadnienie decyzji" name="decyzja_uzasadnienie" typeRef="string" />
+      <rule id="DecisionRule_1xzuxwv">
+        <inputEntry id="UnaryTests_0osjfhg">
+          <text>&gt;=1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lgo5tb">
+          <text>&gt;=1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0h3tqrv">
+          <text>&gt;=10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_033zb06">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1swhe3r">
+          <text>"Zacna oferta"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ohdjov">
+        <inputEntry id="UnaryTests_1qynw1h">
+          <text>&gt;=1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0aev74m">
+          <text>&gt;=1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0enuiuc">
+          <text>&lt;10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ocmd1j">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_12z7sz2">
+          <text>"Dołóż trochę złota, to się dogadamy"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_04enhak">
+        <inputEntry id="UnaryTests_0fqy63t">
+          <text>&lt;1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d8pw7u">
+          <text>&gt;=1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07167ip">
+          <text>&gt;=5000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hx7njq">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1l5dqh2">
+          <text>"Zacna oferta, ale zastanów się nad dodatkowymi mundurami"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0s7rudz">
+        <inputEntry id="UnaryTests_14r5p86">
+          <text>&lt;1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1evevg0">
+          <text>&lt;1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w4mv8u">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_052i8z8">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0r8x0vc">
+          <text>"Rassija nie wspiera małych rewolucji"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1e633f8">
+        <inputEntry id="UnaryTests_12mfcl4">
+          <text>&lt;10</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fe1jg5">
+          <text>&gt;1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zg13jj">
+          <text>&gt;1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lf46jz">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ey6qh2">
+          <text>"Zacna oferta, walczymy jak nasi pradziadkowie"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0l007as">
+        <inputEntry id="UnaryTests_1ehuhv2">
+          <text>&gt;1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r4fj3u">
+          <text>&lt;1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tssqq0">
+          <text>&gt;1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0muvkkf">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1m6zxbq">
+          <text>"Zacna oferta, ale zastanów się nad dodatkowymi sztukami broni"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ooxqp1">
+        <inputEntry id="UnaryTests_1mmvvus">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vassvr">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zetv2q">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0hb6y7l">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0st5jm0">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ewm8pq">
+        <inputEntry id="UnaryTests_1w7p2gi">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yju2jz">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tz45fm">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0og8yug">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1x2jn5b">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14w82ql">
+        <inputEntry id="UnaryTests_11debqk">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_038c6yc">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kagzou">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17aexsq">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0nllel1">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
